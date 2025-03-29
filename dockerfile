@@ -1,12 +1,6 @@
-# Copy from https://github.com/hieupth/mamba
 ARG BASE=ubuntu:24.04
-ARG MINIFORGE=Miniforge3
-ARG PACKAGES
 
 FROM ${BASE}
-# Recall build args.
-ARG PACKAGES
-ARG MINIFORGE
 # Useful envinronment.
 ENV DEBIAN_FRONTEND=noninteractive
 # Install required packages.
@@ -30,25 +24,13 @@ RUN apt-get update --yes && \
         ${PACKAGES} && \
     # Clean cache.
     apt-get clean && rm -rf /var/lib/apt/lists/*
-# Set conda environments.
-ENV CONDA_DIR=/opt/conda
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH=${CONDA_DIR}/bin:${PATH}
-# Install miniforge.
-RUN curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/${MINIFORGE}-$(uname)-$(uname -m).sh && \
-    chmod +x /${MINIFORGE}-$(uname)-$(uname -m).sh && \
-    /${MINIFORGE}-$(uname)-$(uname -m).sh -b -p ${CONDA_DIR} && \
-    rm /${MINIFORGE}-$(uname)-$(uname -m).sh && \
-    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> /etc/skel/.bashrc && \
-    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc && \
-    mamba clean -ay
-# Install packages.
-RUN mamba install -y \
-        huggingface_hub \
-        jinja2 && \
-    mamba clean -ay
+# Install python packages.
+RUN pip install --no-cache-dir \
+        huggingface_hub[hf_transfer] \
+        transformers \
+        jinja2
+COPY ./entry.d /entry.d
 # Set tini.
 ENTRYPOINT ["tini", "-g", "--"]
-ADD entry.d /entry.d
-# Set command.
-CMD [ "/bin/sh /entry.d/entrypoint.sh" ]
+# Set entry command.
+CMD [ "/bin/sh", "/entry.d/entrypoint.sh" ]
