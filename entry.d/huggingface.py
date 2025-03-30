@@ -31,6 +31,6 @@ if __name__ == '__main__':
       revision=model.get('ref'),
       token=model.get('token', token),
       local_dir=triton_model_dir,
-      ignore_patterns=[".*"])
+      ignore_patterns=[".*"].extend(model.get('ignore', [])))
   # Delete cache folder.
   shutil.rmtree(Path(triton_model_dir, '.cache'))
