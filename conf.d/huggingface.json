@@ -3,8 +3,8 @@
   "models": [
     {
       "name": "hieupth/triton.viencoder",
-      "ref": "v1",
-      "token": "{{HF_TOKEN}}"
+      "ref": "main",
+      "token": "{{HF_TOKEN_1}}"
     }
   ]
 }

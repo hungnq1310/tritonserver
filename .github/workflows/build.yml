@@ -8,7 +8,7 @@ on:
     paths:
       - ".github/workflows/build.yml"
       - "dockerfile"
-      - "scripts/*"
+      - "entry.d/*"
 
 jobs:
   build:
