@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         version: ['24.12']
-        variant: ['', '-cpuonly', '-trtllm', '-vllm']
+        variant: ['', '-cpuonly']
     steps:
       - 
         name: Free Disk Space (Ubuntu)

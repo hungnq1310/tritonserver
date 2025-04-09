@@ -2,9 +2,19 @@
   "token": "{{HF_TOKEN}}",
   "models": [
     {
-      "name": "hieupth/triton.viencoder",
-      "ref": "main",
+      "name": "pythera/mbert-retrieve-qry-base",
+      "ref": "onnx",
       "token": "{{HF_TOKEN_1}}"
+    },
+    {
+      "name": "pythera/mbert-retrieve-ctx-base",
+      "ref": "onnx",
+      "token": "{{HF_TOKEN_2}}"
+    },
+    {
+      "name": "pythera/mbert-rerank-base",
+      "ref": "onnx",
+      "token": "{{HF_TOKEN_3}}"
     }
   ]
 }
