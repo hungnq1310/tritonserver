@@ -15,6 +15,11 @@
       "name": "pythera/mbert-rerank-base",
       "ref": "onnx",
       "token": "{{HF_TOKEN_3}}"
+    },
+    {
+      "name": "pythera/sati",
+      "ref": "onnx",
+      "token": "{{HF_TOKEN_1}}"
     }
   ]
 }
